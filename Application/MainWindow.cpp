@@ -1,14 +1,39 @@
+#include <QMenu>
+#include <QToolBar>
+#include <QDockWidget>
+#include <QTextEdit>
 #include "MainWindow.h"
-#include "ui_MainWindow.h"
+#include "QOpenGLWidget_BGFX.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow()
 {
-    ui->setupUi(this);
+    main_window.setupUi(this);
+
+//    QDockWidget* dock = new QDockWidget(tr("Model Tree"), this);
+//    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
+//    QTextEdit* internal_widget = new QTextEdit(dock);
+//    internal_widget->setText("Node name");
+//    dock->setWidget(internal_widget);
+//    addDockWidget(Qt::LeftDockWidgetArea, dock);
 }
 
-MainWindow::~MainWindow()
+void MainWindow::showEvent(QShowEvent* event)
 {
-    delete ui;
+    QMainWindow::showEvent(event);
+
+    if (first_show)
+    {
+        initializeBGFX();
+        first_show = false;
+    }
+}
+
+void MainWindow::initializeBGFX()
+{
+    int width = main_window.centralwidget->width();
+    int height = main_window.centralwidget->height();
+//    void* native_window_handle = reinterpret_cast<void*>(main_window.centralwidget->winId());
+//    main_window.centralwidget->initializeBGFX(width, height, native_window_handle);
+    void* native_window_handle = reinterpret_cast<void*>(main_window.openGLWidget->winId());
+    main_window.openGLWidget->initializeBGFX(width, height, native_window_handle);
 }

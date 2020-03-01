@@ -17,7 +17,10 @@ file(GLOB_RECURSE sources *.cpp)
 file(GLOB_RECURSE forms *.ui)
 file(GLOB_RECURSE headers *.h)
 
-
+include_directories(
+        ${M_BGFX_INCLUDE_DIR}
+        ${M_BX_INCLUDE_DIR}
+)
 
 add_executable(${PROJECT_NAME}
     ${sources}
@@ -25,4 +28,4 @@ add_executable(${PROJECT_NAME}
     ${headers}
 )
 
- target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets)
+ target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets bgfx)

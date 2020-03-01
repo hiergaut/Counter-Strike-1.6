@@ -1,22 +1,28 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
+#include <vector>
+#include <QObject>
 #include <QMainWindow>
-
-namespace Ui {
-class MainWindow;
-}
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QDockWidget>
+#include <QTreeView>
+#include "ui_MainWindow.h"
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    MainWindow();
+
+protected:
+    void showEvent(QShowEvent* event) override;
 
 private:
-    Ui::MainWindow *ui;
-};
+    void initializeBGFX();
 
-#endif // MAINWINDOW_H
+private:
+    bool first_show = true;
+    Ui::MainWindow main_window;
+};
