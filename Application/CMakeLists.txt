@@ -12,16 +12,27 @@ project(MainApplication LANGUAGES CXX)
 #find_package(Qt5 COMPONENTS Widgets REQUIRED)
 #find_package(SDL2 REQUIRED)
 
+#find_package(OpenGL REQUIRED)
+#find_package(glfw3 3.3 REQUIRED)
 
 
-file(GLOB_RECURSE sources *.cpp)
+file(GLOB_RECURSE sources *.cpp *.c)
 #file(GLOB_RECURSE forms *.ui)
 file(GLOB_RECURSE headers *.h)
+
+#add_library(glad include/glad/glad.h Application/glad.c)
+#add_library("glad" "glad/src/glad.c")
+#target_include_directories("glad" PRIVATE "glad/include/")
+
+#add_library(GLAD "glad.c")
+#add_library(GLAD ${CMAKE_SOURCE_DIR}/)
 
 include_directories(${PROJECT_NAME}
 #        ${M_BGFX_INCLUDE_DIR}
 #        ${M_BX_INCLUDE_DIR}
 #        ${SDL2_INCLUDE_DIRS}
+#        ${CMAKE_SOURCE_DIR}/include/
+
 )
 
 add_executable(${PROJECT_NAME}
@@ -29,7 +40,10 @@ add_executable(${PROJECT_NAME}
 #    ${forms}
     ${headers}
 #    ${SDL2_LIBRARIES}
+        ${CMAKE_SOURCE_DIR}/include/
 )
 
+#target_include_directories(${PROJECT_NAME} PRIVATE "../glad/include/")
 # target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets bgfx)
- target_link_libraries(${PROJECT_NAME} PRIVATE bgfx)
+# target_link_libraries(${PROJECT_NAME} PRIVATE bgfx)
+ target_link_libraries(${PROJECT_NAME})
