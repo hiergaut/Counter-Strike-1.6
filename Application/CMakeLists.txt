@@ -16,7 +16,7 @@ project(MainApplication LANGUAGES CXX)
 #find_package(glfw3 3.3 REQUIRED)
 
 
-file(GLOB_RECURSE sources *.cpp *.c)
+file(GLOB_RECURSE sources *.cpp)
 #file(GLOB_RECURSE forms *.ui)
 file(GLOB_RECURSE headers *.h)
 
@@ -31,19 +31,19 @@ include_directories(${PROJECT_NAME}
 #        ${M_BGFX_INCLUDE_DIR}
 #        ${M_BX_INCLUDE_DIR}
 #        ${SDL2_INCLUDE_DIRS}
-#        ${CMAKE_SOURCE_DIR}/include/
+        ${CMAKE_SOURCE_DIR}/include/
 
 )
 
 add_executable(${PROJECT_NAME}
     ${sources}
-#    ${forms}
     ${headers}
+#    ${forms}
 #    ${SDL2_LIBRARIES}
-        ${CMAKE_SOURCE_DIR}/include/
+#    ${CMAKE_SOURCE_DIR}/include/
 )
 
 #target_include_directories(${PROJECT_NAME} PRIVATE "../glad/include/")
 # target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets bgfx)
 # target_link_libraries(${PROJECT_NAME} PRIVATE bgfx)
- target_link_libraries(${PROJECT_NAME})
+ target_link_libraries(${PROJECT_NAME} glfw bgfx GL)
